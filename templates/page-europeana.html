@@ -1,0 +1,121 @@
+<html>
+<head>
+    <title>semantic play list</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+	/*
+        $(document).ready(function() {
+            $('#typex').on('change', function() {
+                window.location.href = './playlist';
+            });
+        });
+	*/
+	
+    </script>
+    <style type="text/css">
+
+		  body {
+			  margin: 1em
+		  }
+		  .result {
+			  float: left;
+			  width: 70%;
+		  }
+		  .query {
+			  width: 20%;
+			  float: right;
+		  }
+		  .search {
+			  display: block;
+			  background: #dddddd;
+			  margin: 1em;
+			  padding: 1em;
+			  width: 220px
+		  }
+		  label {
+			  font-weight: bold;
+		  }
+		  .row {
+			  display: block;
+			  clear: both;
+			  margin: 1em;
+		  }
+		  .button {
+			  background-color: #4CAF50;
+			  border: none;
+			  color: white;
+			  padding: 15px 32px;
+			  text-align: center;
+			  text-decoration: none;
+			  display: inline-block;
+			  font-size: 16px;
+		  }
+	</style>
+</head>
+
+<body>
+    <h1>Cerca su Europeana </h1>
+	<h2>http://www.europeana.eu/</h2>
+    <div class="search">
+        <label>Tipo di risorsa </label>
+		
+        <form method="post">
+            <select id="type" name="type">
+                <option {% if type=="SOUND" or type=="sound" %} selected {% endif %} value="SOUND">audio</option>
+                <option {% if type=="IMAGE" or type=="image" %} selected {% endif %} value="IMAGE">immagini</option>
+                <option {% if type=="VIDEO" or type=="video" %} selected {% endif %} value="VIDEO">video</option>
+            </select>
+            <br/>
+            <label>Cerca per titolo: </label>
+            <input type="text" name="title" value="{{ search }}">
+            <br/>
+            <br/>
+
+            <input class="button" type="submit" value="Ricarica">
+
+        </form>
+
+    </div>
+    <br/>
+    <div class="result">
+    {% for result in results %}
+        <div class="row">
+            <h1> {{ result.title }}</h1>
+            <h3> {{ result.description }}</h3>
+            <label>Source:</label> {{ result.resource }}<br/>
+            <label>Link Proxy:</label> <a target="_blank" href="{{ result.proxy}}" title="link">{{ result.proxy}} </a><br/>
+            <label> Cretor:</label> {{ result.creator }}<br/>
+            <label>Resouce </label>{{ result.resource }}<br/>
+            <label> Data: </label>{{ result.date }}<br/>
+            <label> Media Url : </label><a target="_blank" href="{{ result.mediaURL}}" title="link">{{ result.mediaURL}} </a>
+          
+		   <br/><br/>
+		   {% if type == "VIDEO" %}
+
+				<video width='320' height='240' controls>
+					<source src={{ result.mediaURL }} type=video/mp4; codecs="amp4v.20.8, mp4a.40.2">
+					<source src={{ result.mediaURL }} type=video/mp4; codecs="avc1.42E01E, mp4a.40.2">
+					Your browser does not support the video tag.
+				</video>
+			
+			{% elseif type == "IMAGE" %}
+
+				<img width="300" height="200" src={{ result.mediaURL }}>
+			{% elseif type == "SOUND" %}
+
+				<audio controls>
+					<source src={{ result.mediaURL }} type="audio/ogg">
+					<source src={{ result.mediaURL }} type="audio/mpeg">
+					Your browser does not support the audio element.
+				</audio>
+
+            {% endif %}
+        </div>
+    {% endfor %}
+    </div>
+	<div class="query" >
+		<em>{{query}}</em>
+	</div>
+</body>
+</html>

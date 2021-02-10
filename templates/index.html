@@ -1,0 +1,45 @@
+<html>
+
+<head>
+    <title>semantic play list/title></title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#typex').on('change', function() {
+                window.location.href = './playlist';
+            });
+        });
+    </script>
+
+
+    <style type="text/css">
+        body,
+        result {
+            margin: 1em
+        }
+        .search {
+            display: block;
+            background: #dddddd;
+            margin: 1em;
+            padding: 1em;
+            width: 220px
+        }
+		label{
+		font-weight: bold;
+		}
+		
+		 .row {
+            display: block;
+			clear:both;
+			margin: 1em;
+          
+        }
+    </style>
+</head>
+
+<body>
+ <a href="./playlist"> playlist</a>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<html>
+<head>
+    <title>semantic play list</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#typex').on('change', function() {
+                window.location.href = './playlist';
+            });
+        });
+    </script>
+    <style type="text/css">
+
+		  body {
+			  margin: 1em
+		  }
+		  .result {
+			  float: left;
+			  width: 70%;
+		  }
+		  .query {
+			  width: 20%;
+			  float: right;
+		  }
+		  .search {
+			  display: block;
+			  background: #dddddd;
+			  margin: 1em;
+			  padding: 1em;
+			  width: 220px
+		  }
+		  label {
+			  font-weight: bold;
+		  }
+		  .row {
+			  display: block;
+			  clear: both;
+			  margin: 1em;
+		  }
+		  .button {
+			  background-color: #4CAF50;
+			  border: none;
+			  color: white;
+			  padding: 15px 32px;
+			  text-align: center;
+			  text-decoration: none;
+			  display: inline-block;
+			  font-size: 16px;
+		  }
+	</style>
+</head>
+
+<body>
+    <h1>Cerca su DBPEDIA </h1>
+	<h2></h2>
+    <div class="search">
+  
+		
+
+    </div>
+    <br/>
+    <div class="result">
+    {% for result in results %}
+        <div class="row">
+            <h1> {{ result.film_title}}</h1>
+            <h3> {{ result.film_abstract }}</h3>
+			<p> {{ result.director}}</p>
+        
+    
+          
+        </div>
+    {% endfor %}
+    </div>
+	<div class="query" >
+		<em>{{query}}</em>
+	</div>
+</body>
+</html>
